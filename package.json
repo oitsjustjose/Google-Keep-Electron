@@ -1,5 +1,5 @@
 {
-  "name": "GoogleKeep",
+  "name": "Google Keep",
   "version": "1.0.0",
   "description": "A Google Keep Electron wrapper",
   "main": "main.js",
