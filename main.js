@@ -105,7 +105,16 @@ function createWindow() {
     icon: __dirname + '/icon.png'
   })
 
-  mainWindow.loadURL("https://keep.google.com/")
+  function loadInjectedURL(url) {
+    mainWindow.loadURL(url);
+    mainWindow.webContents.executeJavaScript(`var iDiv = document.createElement('div')`);
+    mainWindow.webContents.executeJavaScript(`iDiv.id = 'titleBar'`)
+    mainWindow.webContents.executeJavaScript(`iDiv.setAttribute('style', 'top: 0; left: 0;width: 100%; height: 1.5em; -webkit-app-region: drag; position: absolute;')`)
+    mainWindow.webContents.executeJavaScript("document.getElementsByTagName('body')[0].appendChild(iDiv);")
+    console.log("Injected " + url + " with title bar successfully")
+  }
+
+  loadInjectedURL("https://keep.google.com/")
 
   mainWindow.on('closed', function () {
     mainWindow = null
@@ -120,18 +129,52 @@ app.on('ready', function () {
 })
 
 app.on('web-contents-created', (e, contents) => {
+
+  function loadInjectedURL(url) {
+    mainWindow.loadURL(url);
+    mainWindow.webContents.executeJavaScript(`var iDiv = document.createElement('div')`);
+    mainWindow.webContents.executeJavaScript(`iDiv.id = 'titleBar'`)
+    mainWindow.webContents.executeJavaScript(`iDiv.setAttribute('style', 'top: 0; left: 0;width: 100%; height: 1.5em; -webkit-app-region: drag; position: absolute;')`)
+    mainWindow.webContents.executeJavaScript("document.getElementsByTagName('body')[0].appendChild(iDiv);")
+    console.log("Injected " + url + " with title bar successfully")
+  }
+
+  if (contents.getType() == 'window') {
+    // Opening a new *window*
+    contents.on('new-window', (e, url) => {
+      e.preventDefault();
+      if (url.indexOf("google") >= 0) {
+        loadInjectedURL(url)
+      }
+      else {
+        shell.openExternal(url)
+      }
+    });
+  }
+
   if (contents.getType() == 'webview') {
+    // Opening a new *window*
     contents.on('new-window', (e, url) => {
       e.preventDefault()
-      mainWindow.loadURL(url)
-      // shell.openExternal(url)
-    })
+      if (url.indexOf("google") >= 0) {
+        loadInjectedURL(url)
+      }
+      else {
+        shell.openExternal(url)
+      }
+    });
+    // Opening a new *link*
     contents.on('will-navigate', (e, url) => {
       e.preventDefault()
-      mainWindow.loadURL(url)
-    })
+      if (url.indexOf("google") >= 0) {
+        loadInjectedURL(url)
+      }
+      else {
+        shell.openExternal(url)
+      }
+    });
   }
-})
+});
 
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
