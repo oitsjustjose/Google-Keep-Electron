@@ -105,11 +105,7 @@ function createWindow() {
     icon: __dirname + '/icon.png'
   })
 
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+  mainWindow.loadURL("https://keep.google.com/")
 
   mainWindow.on('closed', function () {
     mainWindow = null

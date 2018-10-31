@@ -1,19 +1,12 @@
-# Electron Quick Start (CompUTC's Version at least)
+# Gmail for Electron
 
-This repo includes the sample code for creating a desktop-version of a web application (Google Keep, in this case). 
+![icon](https://github.com/oitsjustjose/Google-Keep-Electron/blob/master/icon.png)
 
-## To use:
+This repo includes the sample code for creating a desktop-version of Google Keep.
 
-1. Install node.js
-2. Open a Terminal / Command Prompt
-3. CD into this directory
-4. Type `npm install`
-5. Go Dog Go!!
+![screenshot](https://github.com/oitsjustjose/Google-Keep-Electron/blob/master/screenshot.png)
 
-## Developing:
-
-Developing for Electron is basically just web-development. `index.html` is the "main" class for Electron, do everything based on this. See `main.js` for more refinements you can make!
-
+Releases found [here](https://github.com/oitsjustjose/Google-Keep-Electron/releases)
 
 ## Building (For release):
 
@@ -21,4 +14,10 @@ You'll need electron packager. Get it using:
 
 `npm install electron-packager -g`
 
-See the .bat files - they're useful but need modification to suit your needs. On a Mac / Linux, you can refer to them and just type them yourself. The `release-builds` folder contains the finalized builds when you're done.
+Once done, run any or all of the following:
+
+**Windows**: `electron-packager . "Google Keep" --overwrite --asar=true --platform=win32 --arch=ia32 --icon=icon.ico --prune=true --out=release-builds --version-string.CompanyName=oitsjustjose --version-string.FileDescription="A simple Google Keep electron wrapper" --version-string.ProductName="GoogleKeep"`
+
+**macOS**: `electron-packager . --overwrite --platform=darwin --arch=x64 --icon=./icon.icns --prune=true --out=release-builds`
+
+**Linux**: `electron-packager . "Google Keep" --overwrite --asar=true --platform=linux --arch=x64 --icon=./icon.png --prune=true --out=release-builds`
