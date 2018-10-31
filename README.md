@@ -1,4 +1,4 @@
-# Google Keep (Electron)
+# Electron Quick Start (CompUTC's Version at least)
 
 This repo includes the sample code for creating a desktop-version of a web application (Google Keep, in this case). 
 
@@ -13,6 +13,7 @@ This repo includes the sample code for creating a desktop-version of a web appli
 ## Developing:
 
 Developing for Electron is basically just web-development. `index.html` is the "main" class for Electron, do everything based on this. See `main.js` for more refinements you can make!
+
 
 ## Building (For release):
 

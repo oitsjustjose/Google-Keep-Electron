@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Google Keep</title>
+  </head>
+  <script>
+    function redirect()
+    {
+      location.assign("https://keep.google.com/");
+    }
+  </script>
+
+  <body onload="redirect()">
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
+  </body>
+</html>
